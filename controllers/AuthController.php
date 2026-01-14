@@ -1,10 +1,10 @@
 <?php
 class AuthController {
     public function login() {
-        echo "Login Page";
+        require_once 'views/auth/login.php';
     }
 
     public function register() {
-        echo "Register Page";
+        require_once 'views/auth/register.php';
     }
 }

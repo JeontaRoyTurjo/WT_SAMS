@@ -1,6 +1,6 @@
     </main>
     <footer>
-        <p>author Jeonta Roy Turjo</p>
+        <p>© 2026 Study Abroad Management System | Author:Jeonta Roy Turjo</p>
     </footer>
 </body>
 </html>
