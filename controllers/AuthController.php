@@ -4,7 +4,64 @@ class AuthController {
         require_once 'views/auth/login.php';
     }
 
+    public function loginSubmit() {
+        require_once 'config/database.php';
+        require_once 'models/User.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $user = new User($db);
+
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $result = $user->login($email, $password);
+
+        if ($result) {
+            $_SESSION['user_id'] = $result['id'];
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['role'] = $result['role'];
+            header("Location: index.php?url=dashboard");
+        } else {
+            $error = "Login failed";
+            require_once 'views/auth/login.php';
+        }
+    }
+
     public function register() {
         require_once 'views/auth/register.php';
+    }
+
+    public function registerSubmit() {
+        require_once 'config/database.php';
+        require_once 'models/User.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $user = new User($db);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = $_POST['username'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $role = $_POST['role'] ?? '';
+
+            if (empty($username) || empty($email) || empty($password) || empty($role)) {
+                $error = "All fields are required.";
+            } elseif (strpos($email, '@') === false) {
+                $error = "Invalid email address.";
+            } elseif (strlen($password) < 6) {
+                $error = "Password must be at least 6 characters.";
+            } elseif ($user->emailExists($email)) {
+                $error = "Email already registered.";
+            } else {
+                if ($user->register($username, $email, $password, $role)) {
+                    $success = "Registration successful";
+                } else {
+                    $error = "Registration failed.";
+                }
+            }
+            require_once 'views/auth/register.php';
+        }
     }
 }
