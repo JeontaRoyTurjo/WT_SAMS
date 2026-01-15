@@ -23,6 +23,14 @@ if ($url == '' || $url == 'login') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
     $auth->registerSubmit();
+} elseif ($url == 'profile') {
+    include 'controllers/StudentController.php';
+    $studentCallback = new StudentController();
+    $studentCallback->profile();
+} elseif ($url == 'update_profile') {
+    include 'controllers/StudentController.php';
+    $studentCallback = new StudentController();
+    $studentCallback->updateProfile();
 } elseif ($url == 'logout') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
