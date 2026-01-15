@@ -23,9 +23,13 @@ class AuthController {
             $_SESSION['role'] = $result['role'];
             header("Location: index.php?url=dashboard");
         } else {
-            $error = "Login failed";
             require_once 'views/auth/login.php';
         }
+    }
+
+    public function logout() {
+        session_destroy();
+        header("Location: index.php?url=login");
     }
 
     public function register() {

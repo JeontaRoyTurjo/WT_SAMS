@@ -23,6 +23,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
     $auth->registerSubmit();
+} elseif ($url == 'logout') {
+    include 'controllers/AuthController.php';
+    $auth = new AuthController();
+    $auth->logout();
 } else {
     echo "404 Page Not Found";
 }
