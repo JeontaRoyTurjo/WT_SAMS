@@ -31,6 +31,18 @@ if ($url == '' || $url == 'login') {
     include 'controllers/StudentController.php';
     $studentCallback = new StudentController();
     $studentCallback->updateProfile();
+} elseif ($url == 'update_profile') {
+    include 'controllers/StudentController.php';
+    $studentCallback = new StudentController();
+    $studentCallback->updateProfile();
+} elseif ($url == 'university_profile') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->profile();
+} elseif ($url == 'update_university_profile') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->updateProfile();
 } elseif ($url == 'logout') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
