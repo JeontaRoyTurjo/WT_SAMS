@@ -27,6 +27,14 @@ if ($url == '' || $url == 'login') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
     $auth->logout();
+} elseif ($url == 'reset_password') {
+    include 'controllers/AuthController.php';
+    $auth = new AuthController();
+    $auth->resetPassword();
+} elseif ($url == 'reset_password_submit') {
+    include 'controllers/AuthController.php';
+    $auth = new AuthController();
+    $auth->resetPasswordSubmit();
 } else {
     echo "404 Page Not Found";
 }

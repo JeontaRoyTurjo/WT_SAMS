@@ -6,6 +6,7 @@
     <label>Password:</label> <input type="password" name="password"><br>
     <button type="submit">Login</button>
 </form>
+<a href="index.php?url=reset_password">Forgot Password?</a><br>
 <a href="index.php?url=register">Register</a>
 
 <?php include 'views/layouts/footer.php'; ?>

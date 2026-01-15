@@ -36,5 +36,15 @@ class User {
             return false;
         }
     }
+
+    function updatePassword($email, $new_password) {
+        $sql = "UPDATE users SET password = '$new_password' WHERE email = '$email'";
+        
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>

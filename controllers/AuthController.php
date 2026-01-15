@@ -32,6 +32,33 @@ class AuthController {
         header("Location: index.php?url=login");
     }
 
+    public function resetPassword() {
+        require_once 'views/auth/reset_password.php';
+    }
+
+    public function resetPasswordSubmit() {
+        require_once 'config/database.php';
+        require_once 'models/User.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $user = new User($db);
+
+        $email = $_POST['email'];
+        $new_password = $_POST['new_password'];
+
+        if ($user->emailExists($email)) {
+            if ($user->updatePassword($email, $new_password)) {
+                $success = "Password updated successfully.";
+            } else {
+                $error = "Failed to update password.";
+            }
+        } else {
+            $error = "Email not found.";
+        }
+        require_once 'views/auth/reset_password.php';
+    }
+
     public function register() {
         require_once 'views/auth/register.php';
     }
