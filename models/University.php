@@ -32,5 +32,23 @@ class University {
             return false;
         }
     }
+
+    function getAll() {
+        $sql = "SELECT id, name, location FROM universities";
+        $result = $this->conn->query($sql);
+        $universities = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $universities[] = $row;
+            }
+        }
+        return $universities;
+    }
+
+    function getById($id) {
+        $sql = "SELECT * FROM universities WHERE id = '$id'";
+        $result = $this->conn->query($sql);
+        return $result->fetch_assoc();
+    }
 }
 ?>

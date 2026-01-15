@@ -43,6 +43,18 @@ if ($url == '' || $url == 'login') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();
     $uni->updateProfile();
+} elseif ($url == 'universities') {
+    include 'controllers/StudentController.php';
+    $student = new StudentController();
+    $student->universities();
+} elseif ($url == 'api_universities') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->getUniversitiesJSON();
+} elseif ($url == 'api_university_details') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->getUniversityDetailsJSON();
 } elseif ($url == 'logout') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();

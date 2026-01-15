@@ -53,5 +53,32 @@ class UniversityController {
         $data = $university->getProfile($user_id);
         require_once 'views/university/profile.php';
     }
+
+    public function getUniversitiesJSON() {
+        header('Content-Type: application/json');
+        require_once 'config/database.php';
+        require_once 'models/University.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $university = new University($db);
+
+        $universities = $university->getAll();
+        echo json_encode($universities);
+    }
+
+    public function getUniversityDetailsJSON() {
+        header('Content-Type: application/json');
+        require_once 'config/database.php';
+        require_once 'models/University.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $university = new University($db);
+
+        $id = $_GET['id'] ?? 0;
+        $details = $university->getById($id);
+        echo json_encode($details);
+    }
 }
 ?>

@@ -26,6 +26,14 @@ class StudentController {
         require_once 'views/student/profile.php';
     }
 
+    public function universities() {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?url=login");
+            exit();
+        }
+        require_once 'views/student/universities.php';
+    }
+
     public function updateProfile() {
         require_once 'config/database.php';
         require_once 'models/Student.php';
