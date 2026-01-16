@@ -21,7 +21,7 @@
     <hr>
     
     <h3>Course List</h3>
-    <table border="1" style="border-collapse: collapse; width: 50%;">
+    <table border="1" style="border-collapse: collapse; width: 50%; margin-left: auto; margin-right: auto; text-align: center;">
         <tr>
             <th>Dept</th>
             <th>Name</th>
@@ -37,7 +37,9 @@
     </table>
     
     <br>
+    <br><br>
     <a href="index.php?url=dashboard">Dashboard</a>
+    <br><br><br>
 </center>
 
 <?php include 'views/layouts/footer.php'; ?>

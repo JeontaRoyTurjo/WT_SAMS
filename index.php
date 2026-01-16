@@ -67,6 +67,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/CourseController.php';
     $course = new CourseController();
     $course->removeCourse();
+} elseif ($url == 'apply_course') {
+    include 'controllers/ApplicationController.php';
+    $app = new ApplicationController();
+    $app->apply();
 } elseif ($url == 'logout') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();

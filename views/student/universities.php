@@ -58,11 +58,12 @@ function viewDetails(id) {
         var coursesHtml = '<h4>Offered Courses</h4>';
         if (data.courses && data.courses.length > 0) {
             coursesHtml += '<table border="1" style="border-collapse: collapse; width: 100%;">';
-            coursesHtml += '<tr><th>Dept</th><th>Course Name</th></tr>';
+            coursesHtml += '<tr><th>Dept</th><th>Course Name</th><th>Action</th></tr>';
             for (var i = 0; i < data.courses.length; i++) {
                 coursesHtml += '<tr>';
                 coursesHtml += '<td>' + data.courses[i].department + '</td>';
                 coursesHtml += '<td>' + data.courses[i].course_name + '</td>';
+                coursesHtml += '<td><button onclick="applyForCourse(' + data.id + ', \'' + data.courses[i].course_name + '\')">Apply</button></td>';
                 coursesHtml += '</tr>';
             }
             coursesHtml += '</table>';
@@ -75,6 +76,30 @@ function viewDetails(id) {
         document.getElementById('university-details').style.display = 'block';
     });
 }
+
+function applyForCourse(uniId, courseName) {
+    if (!confirm('Apply for ' + courseName + '?')) return;
+    
+    var formData = new FormData();
+    formData.append('university_id', uniId);
+    formData.append('course_name', courseName);
+    
+    fetch('index.php?url=apply_course', {
+        method: 'POST',
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            alert('Application submitted successfully!');
+        } else {
+            alert('Error: ' + data.message);
+        }
+    });
+}
+
 
 loadUniversities();
 </script>
