@@ -55,6 +55,18 @@ if ($url == '' || $url == 'login') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();
     $uni->getUniversityDetailsJSON();
+} elseif ($url == 'manage_courses') {
+    include 'controllers/CourseController.php';
+    $course = new CourseController();
+    $course->manageCourses();
+} elseif ($url == 'add_course') {
+    include 'controllers/CourseController.php';
+    $course = new CourseController();
+    $course->addCourse();
+} elseif ($url == 'remove_course') {
+    include 'controllers/CourseController.php';
+    $course = new CourseController();
+    $course->removeCourse();
 } elseif ($url == 'logout') {
     include 'controllers/AuthController.php';
     $auth = new AuthController();
