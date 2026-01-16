@@ -47,6 +47,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/StudentController.php';
     $student = new StudentController();
     $student->universities();
+} elseif ($url == 'history') {
+    include 'controllers/StudentController.php';
+    $student = new StudentController();
+    $student->history();
 } elseif ($url == 'api_universities') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();

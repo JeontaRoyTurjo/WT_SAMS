@@ -7,7 +7,7 @@
     
     <a href="index.php?url=profile">My Profile</a> <br><br>
     <a href="index.php?url=universities">Search Universities</a> <br><br>
-    <a href="index.php?url=applications">My Applications</a> <br><br>
+    <a href="index.php?url=history">My Applications</a> <br><br>
     
     <hr>
     

@@ -56,5 +56,32 @@ class StudentController {
         $data = $student->getProfile($user_id);
         require_once 'views/student/profile.php';
     }
+
+    public function history() {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?url=login");
+            exit();
+        }
+
+        require_once 'config/database.php';
+        require_once 'models/Student.php';
+        require_once 'models/Application.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $student = new Student($db);
+        $app = new Application($db);
+
+        $user_id = $_SESSION['user_id'];
+        $profile = $student->getProfile($user_id);
+
+        if ($profile) {
+            $student_id = $profile['id'];
+            $applications = $app->getHistory($student_id);
+            require_once 'views/student/history.php';
+        } else {
+            echo "Student profile not found";
+        }
+    }
 }
 ?>
