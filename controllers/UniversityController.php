@@ -76,8 +76,17 @@ class UniversityController {
         $db = $database->getConnection();
         $university = new University($db);
 
+        require_once 'models/Course.php';
+
         $id = $_GET['id'] ?? 0;
         $details = $university->getById($id);
+        
+        if ($details) {
+            $courseModel = new Course($db);
+            $courses = $courseModel->getCourses($id);
+            $details['courses'] = $courses;
+        }
+        
         echo json_encode($details);
     }
 }

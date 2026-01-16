@@ -10,6 +10,7 @@
         <h3 id="detail-name"></h3>
         <p><strong>Location:</strong> <span id="detail-location"></span></p>
         <p><strong>Description:</strong> <span id="detail-description"></span></p>
+        <div id="detail-courses"></div>
         <button onclick="document.getElementById('university-details').style.display='none'">Close</button>
     </div>
     
@@ -53,6 +54,24 @@ function viewDetails(id) {
         document.getElementById('detail-name').innerText = data.name;
         document.getElementById('detail-location').innerText = data.location;
         document.getElementById('detail-description').innerText = data.description;
+        
+        var coursesHtml = '<h4>Offered Courses</h4>';
+        if (data.courses && data.courses.length > 0) {
+            coursesHtml += '<table border="1" style="border-collapse: collapse; width: 100%;">';
+            coursesHtml += '<tr><th>Dept</th><th>Course Name</th></tr>';
+            for (var i = 0; i < data.courses.length; i++) {
+                coursesHtml += '<tr>';
+                coursesHtml += '<td>' + data.courses[i].department + '</td>';
+                coursesHtml += '<td>' + data.courses[i].course_name + '</td>';
+                coursesHtml += '</tr>';
+            }
+            coursesHtml += '</table>';
+        } else {
+            coursesHtml += '<p>No courses available.</p>';
+        }
+        
+        document.getElementById('detail-courses').innerHTML = coursesHtml;
+        
         document.getElementById('university-details').style.display = 'block';
     });
 }
