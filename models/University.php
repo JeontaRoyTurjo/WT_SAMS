@@ -7,7 +7,7 @@ class University {
     }
 
     function getProfile($user_id) {
-        $sql = "SELECT u.username, u.email, un.name as university_name, un.location, un.description 
+        $sql = "SELECT u.username, u.email, un.id, un.name as university_name, un.location, un.description 
                 FROM users u 
                 LEFT JOIN universities un ON u.id = un.user_id 
                 WHERE u.id = '$user_id'";

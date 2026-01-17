@@ -27,6 +27,13 @@ class ApplicationController {
         }
         
         $student_id = $studentProfile['id'];
+
+        if (empty($student_id)) {
+            $studentModel->updateProfile($user_id, '', '', '');
+            $studentProfile = $studentModel->getProfile($user_id);
+            $student_id = $studentProfile['id'];
+        }
+
         $university_id = $_POST['university_id'];
         $course_name = $_POST['course_name'];
 

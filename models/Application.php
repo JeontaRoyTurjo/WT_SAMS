@@ -29,5 +29,24 @@ class Application {
         }
         return $history;
     }
+
+    function getApplicationsByUniversity($university_id) {
+        $sql = "SELECT a.id, s.name as student_name, u.username, a.course_name, a.status 
+                FROM applications a
+                LEFT JOIN students s ON a.student_id = s.id
+                LEFT JOIN users u ON s.user_id = u.id
+                WHERE a.university_id = '$university_id'";
+        $result = $this->conn->query($sql);
+        $apps = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (empty($row['student_name'])) {
+                    $row['student_name'] = $row['username'] ?? 'Unknown'; 
+                }
+                $apps[] = $row;
+            }
+        }
+        return $apps;
+    }
 }
 ?>

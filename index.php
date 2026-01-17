@@ -59,6 +59,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();
     $uni->getUniversityDetailsJSON();
+} elseif ($url == 'view_applications') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->applications();
 } elseif ($url == 'manage_courses') {
     include 'controllers/CourseController.php';
     $course = new CourseController();

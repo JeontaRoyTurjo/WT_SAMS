@@ -89,5 +89,32 @@ class UniversityController {
         
         echo json_encode($details);
     }
+
+    public function applications() {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: index.php?url=login");
+            exit();
+        }
+
+        require_once 'config/database.php';
+        require_once 'models/University.php';
+        require_once 'models/Application.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $university = new University($db);
+        $app = new Application($db);
+
+        $user_id = $_SESSION['user_id'];
+        $profile = $university->getProfile($user_id);
+
+        if ($profile) {
+            $university_id = $profile['id'];
+            $applications = $app->getApplicationsByUniversity($university_id);
+            require_once 'views/university/applications.php';
+        } else {
+            echo "University profile not found";
+        }
+    }
 }
 ?>
