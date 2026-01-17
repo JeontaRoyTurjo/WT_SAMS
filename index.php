@@ -63,6 +63,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();
     $uni->applications();
+} elseif ($url == 'update_application_status') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->updateApplicationStatus();
 } elseif ($url == 'manage_courses') {
     include 'controllers/CourseController.php';
     $course = new CourseController();

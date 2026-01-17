@@ -48,5 +48,14 @@ class Application {
         }
         return $apps;
     }
+
+    function updateStatus($id, $status) {
+        $sql = "UPDATE applications SET status='$status' WHERE id='$id'";
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>
