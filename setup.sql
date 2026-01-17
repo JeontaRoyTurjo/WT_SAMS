@@ -40,7 +40,8 @@ CREATE TABLE applications (
     student_id INT,
     university_id INT,
     course_name VARCHAR(100),
-    status VARCHAR(20) DEFAULT 'pending'
+    status VARCHAR(20) DEFAULT 'pending',
+    feedback TEXT
 );
 
 CREATE TABLE feedback (

@@ -16,7 +16,7 @@ class Application {
     }
 
     function getHistory($student_id) {
-        $sql = "SELECT a.id, u.name as university_name, a.course_name, a.status 
+        $sql = "SELECT a.id, u.name as university_name, a.course_name, a.status, a.feedback 
                 FROM applications a
                 JOIN universities u ON a.university_id = u.id
                 WHERE a.student_id = '$student_id'";
@@ -31,7 +31,7 @@ class Application {
     }
 
     function getApplicationsByUniversity($university_id) {
-        $sql = "SELECT a.id, s.name as student_name, u.username, a.course_name, a.status 
+        $sql = "SELECT a.id, s.name as student_name, u.username, a.course_name, a.status, a.feedback 
                 FROM applications a
                 LEFT JOIN students s ON a.student_id = s.id
                 LEFT JOIN users u ON s.user_id = u.id
@@ -51,6 +51,14 @@ class Application {
 
     function updateStatus($id, $status) {
         $sql = "UPDATE applications SET status='$status' WHERE id='$id'";
+        if ($this->conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function sendFeedback($id, $feedback) {
+        $sql = "UPDATE applications SET feedback='$feedback' WHERE id='$id'";
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {

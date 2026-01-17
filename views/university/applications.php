@@ -11,6 +11,7 @@
                 <th style="padding: 10px;">Student Name</th>
                 <th style="padding: 10px;">Course Applied</th>
                 <th style="padding: 10px;">Status</th>
+                <th style="padding: 10px;">Feedback</th>
                 <th style="padding: 10px;">Action</th>
             </tr>
             <?php foreach ($applications as $app): ?>
@@ -18,6 +19,10 @@
                 <td style="padding: 10px;"><?php echo htmlspecialchars($app['student_name']); ?></td>
                 <td style="padding: 10px;"><?php echo htmlspecialchars($app['course_name']); ?></td>
                 <td style="padding: 10px;" id="status-<?php echo $app['id']; ?>"><?php echo htmlspecialchars($app['status']); ?></td>
+                <td style="padding: 10px;">
+                    <input type="text" id="feedback-<?php echo $app['id']; ?>" value="<?php echo htmlspecialchars($app['feedback'] ?? ''); ?>" placeholder="Enter feedback">
+                    <button onclick="sendFeedback(<?php echo $app['id']; ?>)">Send</button>
+                </td>
                 <td style="padding: 10px;">
                     <?php if ($app['status'] == 'pending'): ?>
                         <button onclick="updateStatus(<?php echo $app['id']; ?>, 'accepted')">Accept</button>
@@ -55,6 +60,33 @@ function updateStatus(id, status) {
             document.getElementById('status-' + id).innerText = status;
             // Optionally reload to update buttons or hide them
             location.reload(); 
+        } else {
+            alert('Error: ' + data.message);
+        }
+    });
+}
+
+function sendFeedback(id) {
+    var feedback = document.getElementById('feedback-' + id).value;
+    if (!feedback) {
+        alert('Please enter feedback');
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('id', id);
+    formData.append('feedback', feedback);
+
+    fetch('index.php?url=update_application_feedback', {
+        method: 'POST',
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            alert('Feedback sent successfully');
         } else {
             alert('Error: ' + data.message);
         }

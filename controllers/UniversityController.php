@@ -141,5 +141,29 @@ class UniversityController {
             echo json_encode(['success' => false, 'message' => 'Update failed']);
         }
     }
+    public function updateApplicationFeedback() {
+        header('Content-Type: application/json');
+        
+        if (!isset($_SESSION['user_id'])) {
+            echo json_encode(['success' => false, 'message' => 'Not logged in']);
+            exit();
+        }
+
+        require_once 'config/database.php';
+        require_once 'models/Application.php';
+
+        $database = new Database();
+        $db = $database->getConnection();
+        $app = new Application($db);
+
+        $id = $_POST['id'];
+        $feedback = $_POST['feedback'];
+
+        if ($app->sendFeedback($id, $feedback)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
 }
 ?>
