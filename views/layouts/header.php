@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Study Abroad</title>
-    <link rel="stylesheet" href="/SAMS/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <header>
