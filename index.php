@@ -67,6 +67,10 @@ if ($url == '' || $url == 'login') {
     include 'controllers/UniversityController.php';
     $uni = new UniversityController();
     $uni->updateApplicationStatus();
+} elseif ($url == 'update_application_feedback') {
+    include 'controllers/UniversityController.php';
+    $uni = new UniversityController();
+    $uni->updateApplicationFeedback();
 } elseif ($url == 'manage_courses') {
     include 'controllers/CourseController.php';
     $course = new CourseController();
